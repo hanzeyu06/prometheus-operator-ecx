@@ -423,6 +423,7 @@ func makeStatefulSetSpec(
 				Scheme: prometheusURIScheme,
 				Host:   c.LocalHost + ":9090",
 				Path:   path.Clean(webRoutePrefix + "/-/reload"),
+				User:   url.UserPassword(c.AuthUser, c.AuthPassword),
 			}),
 			operator.ListenLocal(cpf.ListenLocal),
 			operator.LocalHost(c.LocalHost),

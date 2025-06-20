@@ -45,6 +45,8 @@ type Config struct {
 	AlertManagerSelector         string
 	ThanosRulerSelector          string
 	SecretListWatchSelector      string
+	AuthUser                     string
+	AuthPassword                 string
 }
 
 // ContainerConfig holds some configuration for the ConfigReloader sidecar

@@ -78,8 +78,8 @@ GO_BUILD_LDFLAGS=\
 	-X $(PROMETHEUS_COMMON_PKG)/version.Version=$(VERSION)
 
 GO_BUILD_RECIPE=\
-	GOOS=$(GOOS) \
-	GOARCH=$(GOARCH) \
+	GOOS=linux \
+	GOARCH=arm64 \
 	CGO_ENABLED=0 \
 	go build -ldflags="$(GO_BUILD_LDFLAGS)"
 
@@ -174,7 +174,7 @@ image: .hack-operator-image .hack-prometheus-config-reloader-image .hack-admissi
 # Create empty target file, for the sole purpose of recording when this target
 # was last executed via the last-modification timestamp on the file. See
 # https://www.gnu.org/software/make/manual/make.html#Empty-Targets
-	$(CONTAINER_CLI) build --build-arg ARCH=$(ARCH) --build-arg OS=$(GOOS) -t $(IMAGE_OPERATOR):$(TAG) .
+	$(CONTAINER_CLI) build --platform=linux/arm64 -t $(IMAGE_OPERATOR):$(TAG) .
 	touch $@
 
 .hack-prometheus-config-reloader-image: cmd/prometheus-config-reloader/Dockerfile prometheus-config-reloader
